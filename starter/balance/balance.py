@@ -7,12 +7,14 @@ class Balance:
 
     _instance = None
     _balance = 0.0
+    _observers = []
 
     def __init__(self):
         """Initialize the balance. Prevent direct instantiation."""
         if Balance._instance is not None:
             raise Exception("This class is a singleton!")
         Balance._instance = self
+        Balance._observers = []
 
     @classmethod
     def get_instance(cls):
@@ -33,6 +35,21 @@ class Balance:
         """Subtract expense from the balance."""
         Balance._balance -= amount
 
+    def register_observer(self, observer):
+        """Register an observer to be notified of balance changes."""
+        if observer not in Balance._observers:
+            Balance._observers.append(observer)
+
+    def unregister_observer(self, observer):
+        """Unregister an observer."""
+        if observer in Balance._observers:
+            Balance._observers.remove(observer)
+
+    def notify_observers(self, transaction):
+        """Notify all registered observers of a transaction."""
+        for observer in Balance._observers:
+            observer.update(Balance._balance, transaction)
+
     def apply_transaction(self, transaction):
         """
         Apply a Transaction object to update the balance.
@@ -46,6 +63,9 @@ class Balance:
             self.add_expense(transaction.amount)
         else:
             raise ValueError(f"Invalid transaction category: {transaction.category}")
+        
+        # Notify all observers after transaction is applied
+        self.notify_observers(transaction)
 
     def get_balance(self):
         """Get the current net balance."""
