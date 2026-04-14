@@ -9,4 +9,9 @@ class TransactionAdapter:
 
     def to_transaction(self):
         """Convert an external transaction to a standard Transaction."""
-        pass
+        # Check if it's an ExternalFreelanceIncome (which is always income)
+        if hasattr(self.external_transaction, 'typ') and self.external_transaction.typ == "income":
+            return Transaction(self.external_transaction.amount, TransactionCategory.INCOME)
+        # For future extensibility, could handle other external transaction types
+        # For now, assume all external transactions are income
+        return Transaction(self.external_transaction.amount, TransactionCategory.INCOME)
