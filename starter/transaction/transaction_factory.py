@@ -21,7 +21,7 @@ from transaction.transaction_category import TransactionCategory
 class TransactionFactory:
     """
     Factory for creating Transaction objects.
-    
+
     This class uses the Factory Pattern to centralize the creation of transactions.
     Instead of clients directly instantiating Transaction objects, they use factory
     methods that ensure proper transaction creation.
@@ -31,13 +31,13 @@ class TransactionFactory:
     def create_income(amount):
         """
         Create an Income transaction.
-        
+
         Args:
             amount (float): The income amount.
-            
+
         Returns:
             Transaction: A transaction with INCOME category.
-            
+
         Raises:
             ValueError: If amount is negative or zero.
         """
@@ -49,13 +49,13 @@ class TransactionFactory:
     def create_expense(amount):
         """
         Create an Expense transaction.
-        
+
         Args:
             amount (float): The expense amount.
-            
+
         Returns:
             Transaction: A transaction with EXPENSE category.
-            
+
         Raises:
             ValueError: If amount is negative or zero.
         """
@@ -67,18 +67,18 @@ class TransactionFactory:
     def create_transaction(amount, category):
         """
         Create a Transaction with explicit category.
-        
+
         This is a generic factory method for creating transactions. For specific
         transaction types, prefer create_income() or create_expense() for better
         type safety.
-        
+
         Args:
             amount (float): The transaction amount.
             category (TransactionCategory): The transaction category.
-            
+
         Returns:
             Transaction: A transaction with the specified amount and category.
-            
+
         Raises:
             ValueError: If amount is negative or zero, or category is invalid.
         """

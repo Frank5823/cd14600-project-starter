@@ -2,6 +2,7 @@
 
 from transaction.transaction_category import TransactionCategory
 
+
 class Balance:
     """Singleton to track the balance."""
 
@@ -63,7 +64,7 @@ class Balance:
             self.add_expense(transaction.amount)
         else:
             raise ValueError(f"Invalid transaction category: {transaction.category}")
-        
+
         # Notify all observers after transaction is applied
         self.notify_observers(transaction)
 
@@ -74,4 +75,3 @@ class Balance:
     def summary(self):
         """Return a summary string of the net balance."""
         return f"Current balance: ${Balance._balance:.2f}"
-    

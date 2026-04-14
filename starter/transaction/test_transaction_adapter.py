@@ -4,6 +4,7 @@ from transaction.transaction_adapter import TransactionAdapter
 from transaction.transaction import Transaction
 from transaction.transaction_category import TransactionCategory
 
+
 class TestTransactionAdapter(unittest.TestCase):
 
     def test_adapter_converts_freelance_income(self):
@@ -11,6 +12,7 @@ class TestTransactionAdapter(unittest.TestCase):
         adapter = TransactionAdapter(ext_txn)
         txn = adapter.to_transaction()
         self.assertEqual(txn, Transaction(500, TransactionCategory.INCOME))
+
 
 if __name__ == "__main__":
     unittest.main()
